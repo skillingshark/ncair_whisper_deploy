@@ -1,1 +1,0 @@
-# ncair_whisper_deploy
