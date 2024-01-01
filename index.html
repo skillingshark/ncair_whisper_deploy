@@ -189,7 +189,7 @@
 
             function loadWhisper(model) {
                 let urls = {
-                    'tiny.en': 'http://127.0.0.1:5872/03_vad_wasm/ggml-model-whisper-tiny.en.bin',
+                    'tiny.en': './ggml-model-whisper-tiny.en.bin',
                     'base.en': 'http://127.0.0.1:5872/03_vad_wasm/ggml-model-whisper-base.en.bin',
 
                     'tiny-en-q5_1':  'https://whisper.ggerganov.com/ggml-model-whisper-tiny.en-q5_1.bin',
@@ -225,11 +225,11 @@
 
                 cbCancel = function() {
                     var el;
-                    el = document.getElementById('fetch-whisper-tiny-en'); if (el) el.style.display = 'inline-block';
-                    el = document.getElementById('fetch-whisper-base-en'); if (el) el.style.display = 'inline-block';
+                    // el = document.getElementById('fetch-whisper-tiny-en'); if (el) el.style.display = 'inline-block';
+                    // el = document.getElementById('fetch-whisper-base-en'); if (el) el.style.display = 'inline-block';
 
-                    el = document.getElementById('fetch-whisper-tiny-en-q5_1'); if (el) el.style.display = 'inline-block';
-                    el = document.getElementById('fetch-whisper-base-en-q5_1'); if (el) el.style.display = 'inline-block';
+                    // el = document.getElementById('fetch-whisper-tiny-en-q5_1'); if (el) el.style.display = 'inline-block';
+                    // el = document.getElementById('fetch-whisper-base-en-q5_1'); if (el) el.style.display = 'inline-block';
 
                     el = document.getElementById('model-whisper-status');  if (el) el.innerHTML = '';
                 };
@@ -260,118 +260,110 @@
                 context = null;
             }
 
-            function startRecording() {
-                if (!context) {
-                    context = new AudioContext({
-                        sampleRate: kSampleRate,
-                        channelCount: 1,
-                        echoCancellation: false,
-                        autoGainControl:  true,
-                        noiseSuppression: true,
-                    });
-                }
+            // function startRecording() {
+            //     if (!context) {
+            //         context = new AudioContext({
+            //             sampleRate: kSampleRate,
+            //             channelCount: 1,
+            //             echoCancellation: false,
+            //             autoGainControl:  true,
+            //             noiseSuppression: true,
+            //         });
+            //     }
 
-                Module.set_status("");
+               
 
-                // document.getElementById('start').disabled = true;
-                // document.getElementById('stop').disabled = false;
+            //     navigator.mediaDevices.getUserMedia({audio: true, video: false})
+            //         .then(function(s) {
+            //             stream = s;
+            //             mediaRecorder = new MediaRecorder(stream);
+            //             mediaRecorder.ondataavailable = function(e) {
+            //                 chunks.push(e.data);
 
-                doRecording = true;
-                startTime = Date.now();
+            //                 var blob = new Blob(chunks, { 'type' : 'audio/ogg; codecs=opus' });
+            //                 var reader = new FileReader();
 
-                var chunks = [];
-                var stream = null;
+            //                 reader.onload = function(event) {
+            //                     var buf = new Uint8Array(reader.result);
 
-                navigator.mediaDevices.getUserMedia({audio: true, video: false})
-                    .then(function(s) {
-                        stream = s;
-                        mediaRecorder = new MediaRecorder(stream);
-                        mediaRecorder.ondataavailable = function(e) {
-                            chunks.push(e.data);
+            //                     if (!context) {
+            //                         return;
+            //                     }
+            //                     context.decodeAudioData(buf.buffer, function(audioBuffer) {
+            //                         var offlineContext = new OfflineAudioContext(audioBuffer.numberOfChannels, audioBuffer.length, audioBuffer.sampleRate);
+            //                         var source = offlineContext.createBufferSource();
+            //                         source.buffer = audioBuffer;
+            //                         source.connect(offlineContext.destination);
+            //                         source.start(0);
 
-                            var blob = new Blob(chunks, { 'type' : 'audio/ogg; codecs=opus' });
-                            var reader = new FileReader();
+            //                         offlineContext.startRendering().then(function(renderedBuffer) {
+            //                             audio = renderedBuffer.getChannelData(0);
 
-                            reader.onload = function(event) {
-                                var buf = new Uint8Array(reader.result);
+            //                             //printTextarea('js: audio recorded, size: ' + audio.length + ', old size: ' + (audio0 == null ? 0 : audio0.length));
 
-                                if (!context) {
-                                    return;
-                                }
-                                context.decodeAudioData(buf.buffer, function(audioBuffer) {
-                                    var offlineContext = new OfflineAudioContext(audioBuffer.numberOfChannels, audioBuffer.length, audioBuffer.sampleRate);
-                                    var source = offlineContext.createBufferSource();
-                                    source.buffer = audioBuffer;
-                                    source.connect(offlineContext.destination);
-                                    source.start(0);
+            //                             var audioAll = new Float32Array(audio0 == null ? audio.length : audio0.length + audio.length);
+            //                             if (audio0 != null) {
+            //                                 audioAll.set(audio0, 0);
+            //                             }
+            //                             audioAll.set(audio, audio0 == null ? 0 : audio0.length);
 
-                                    offlineContext.startRendering().then(function(renderedBuffer) {
-                                        audio = renderedBuffer.getChannelData(0);
+            //                             if (instance) {
+            //                                 Module.set_audio(instance, audioAll);
+            //                             }
+            //                         });
+            //                     }, function(e) {
+            //                         audio = null;
+            //                     });
+            //                 }
 
-                                        //printTextarea('js: audio recorded, size: ' + audio.length + ', old size: ' + (audio0 == null ? 0 : audio0.length));
+            //                 reader.readAsArrayBuffer(blob);
+            //             };
 
-                                        var audioAll = new Float32Array(audio0 == null ? audio.length : audio0.length + audio.length);
-                                        if (audio0 != null) {
-                                            audioAll.set(audio0, 0);
-                                        }
-                                        audioAll.set(audio, audio0 == null ? 0 : audio0.length);
+            //             mediaRecorder.onstop = function(e) {
+            //                 if (doRecording) {
+            //                     setTimeout(function() {
+            //                         startRecording();
+            //                     });
+            //                 }
+            //             };
 
-                                        if (instance) {
-                                            Module.set_audio(instance, audioAll);
-                                        }
-                                    });
-                                }, function(e) {
-                                    audio = null;
-                                });
-                            }
+            //             mediaRecorder.start(kIntervalAudio_ms);
+            //         })
 
-                            reader.readAsArrayBuffer(blob);
-                        };
+            //         .catch(function(err) {
+            //             printTextarea('js: error getting audio stream: ' + err);
+            //         });
 
-                        mediaRecorder.onstop = function(e) {
-                            if (doRecording) {
-                                setTimeout(function() {
-                                    startRecording();
-                                });
-                            }
-                        };
+            //     var interval = setInterval(function() {
+            //         if (!doRecording) {
+            //             clearInterval(interval);
+            //             mediaRecorder.stop();
+            //             stream.getTracks().forEach(function(track) {
+            //                 track.stop();
+            //             });
 
-                        mediaRecorder.start(kIntervalAudio_ms);
-                    })
-                    .catch(function(err) {
-                        printTextarea('js: error getting audio stream: ' + err);
-                    });
+            //             // document.getElementById('start').disabled = false;
+            //             // document.getElementById('stop').disabled  = true;
 
-                var interval = setInterval(function() {
-                    if (!doRecording) {
-                        clearInterval(interval);
-                        mediaRecorder.stop();
-                        stream.getTracks().forEach(function(track) {
-                            track.stop();
-                        });
+            //             mediaRecorder = null;
+            //         }
 
-                        // document.getElementById('start').disabled = false;
-                        // document.getElementById('stop').disabled  = true;
+            //         // if audio length is more than kRestartRecording_s seconds, restart recording
+            //         if (audio != null && audio.length > kSampleRate*kRestartRecording_s) {
+            //             if (doRecording) {
+            //                 //printTextarea('js: restarting recording');
 
-                        mediaRecorder = null;
-                    }
-
-                    // if audio length is more than kRestartRecording_s seconds, restart recording
-                    if (audio != null && audio.length > kSampleRate*kRestartRecording_s) {
-                        if (doRecording) {
-                            //printTextarea('js: restarting recording');
-
-                            clearInterval(interval);
-                            audio0 = audio;
-                            audio = null;
-                            mediaRecorder.stop();
-                            stream.getTracks().forEach(function(track) {
-                                track.stop();
-                            });
-                        }
-                    }
-                }, 100);
-            }
+            //                 clearInterval(interval);
+            //                 audio0 = audio;
+            //                 audio = null;
+            //                 mediaRecorder.stop();
+            //                 stream.getTracks().forEach(function(track) {
+            //                     track.stop();
+            //                 });
+            //             }
+            //         }
+            //     }, 100);
+            // }
 
             //
             // main
@@ -389,11 +381,82 @@
         const transcriptionResult = document.getElementById('transcriptionResult');
         const detectedLanguage = document.getElementById('detectedLanguage');
 
+        // ////////////////////////////////////////
+        // statusElement.textContent = 'Recording started';
+        //         if (!instance) {
+        //             instance = Module.init('whisper.bin');
+
+        //             if (instance) {
+        //                 printTextarea("js: whisper initialized, instance: " + instance);
+        //             }
+        //         }
+
+        //         if (!instance) {
+        //             printTextarea("js: failed to initialize whisper");
+        //             return;
+        //         }
+
+        //         startRecording();
+
+        //         intervalUpdate = setInterval(function() {
+        //             var transcribed = Module.get_transcribed();
+
+        //             if (transcribed != null && transcribed.length > 1) {
+        //                 transcribedAll += transcribed + '<br>';
+        //                 nLines++;
+
+        //                 // if more than 10 lines, remove the first line
+        //                 if (nLines > 10) {
+        //                     var i = transcribedAll.indexOf('<br>');
+        //                     if (i > 0) {
+        //                         transcribedAll = transcribedAll.substring(i + 4);
+        //                         nLines--;
+        //                     }
+        //                 }
+        //             }
+
+        //             document.getElementById('state-status').innerHTML = Module.get_status();
+        //             document.getElementById('state-transcribed').innerHTML = transcribedAll;
+        //         }, 100);
+
+
+        //////////////////////////////////////////
+
         // let all_text = "";
 
         const myvad = await vad.MicVAD.new({
+
             onSpeechStart: () => {
                 statusElement.textContent = 'Recording started';
+                
+
+                // startRecording();
+
+                // intervalUpdate = setInterval(function() {
+                //     var transcribed = Module.get_transcribed();
+
+                //     if (transcribed != null && transcribed.length > 1) {
+                //         transcribedAll += transcribed + '<br>';
+                //         nLines++;
+
+                //         // if more than 10 lines, remove the first line
+                //         if (nLines > 10) {
+                //             var i = transcribedAll.indexOf('<br>');
+                //             if (i > 0) {
+                //                 transcribedAll = transcribedAll.substring(i + 4);
+                //                 nLines--;
+                //             }
+                //         }
+                //     }
+
+                //     document.getElementById('state-status').innerHTML = Module.get_status();
+                //     document.getElementById('state-transcribed').innerHTML = transcribedAll;
+                // }, 100);
+
+            },
+        
+            
+            onSpeechEnd: (audio) => {
                 if (!instance) {
                     instance = Module.init('whisper.bin');
 
@@ -406,9 +469,39 @@
                     printTextarea("js: failed to initialize whisper");
                     return;
                 }
+                // const wavBuffer = vad.utils.encodeWAV(arr)
+                // const base64 = vad.utils.arrayBufferToBase64(wavBuffer)
+                statusElement.textContent = 'Recording finished';
+                // stopRecording();
+                var audioAll = new Float32Array(audio0 == null ? audio.length : audio0.length + audio.length);
+                            if (audio0 != null) {
+                                audioAll.set(audio0, 0);
+                            }
+                            audioAll.set(audio, audio0 == null ? 0 : audio0.length);
 
-                startRecording();
+                            if (instance) {
+                                Module.set_audio(instance, audioAll);
+                            }
+//// start recording called
+if (!context) {
+                    context = new AudioContext({
+                        sampleRate: kSampleRate,
+                        channelCount: 1,
+                        echoCancellation: false,
+                        autoGainControl:  true,
+                        noiseSuppression: true,
+                    });
+                }
+                            Module.set_status("");
 
+                            doRecording = true;
+                            startTime = Date.now();
+
+                            var chunks = [];
+                            var stream = null;
+
+                            //// start recording ended
+                    
                 intervalUpdate = setInterval(function() {
                     var transcribed = Module.get_transcribed();
 
@@ -427,15 +520,47 @@
                     }
 
                     document.getElementById('state-status').innerHTML = Module.get_status();
-                    document.getElementById('state-transcribed').innerHTML = transcribedAll;
+                    // document.getElementById('state-transcribed').innerHTML = transcribedAll;
                 }, 100);
-
-            },
-        
-            
-            onSpeechEnd: () => {
-                statusElement.textContent = 'Recording finished';
                 stopRecording();
+                       console.log('transciption //////////////')      
+                console.log(transcribedAll)
+                searchString = "Hello"
+                if (transcribedAll.includes(searchString)) 
+                {   
+                    console.log('got it ');
+                    console.log('got it ');
+                    console.log('got it ');
+                    console.log('got it ');
+
+                    secondary()
+                }
+                else if (transcribedAll.includes("hello"))
+                {
+                    console.log('got it ');
+                    console.log('got it ');
+                    console.log('got it ');
+                    console.log('got it ');
+
+                    secondary()
+                }
+                else if (transcribedAll.includes("Okay"))
+                {
+                    console.log('got it ');
+                    console.log('got it ');
+                    console.log('got it ');
+                    console.log('got it ');
+
+                    secondary()
+                }
+                // searchString= "Okay"
+                // stopRecording();
+                // else 
+                // {
+                //     console.log("The text does not contain the specified string.");
+                // }
+
+
             },
         });
 
@@ -444,7 +569,120 @@
         // listeningstatus.textContent = myvad.listening();
 
     }
+        
+    async function secondary()
+    {   
+        var cnt = 0 ;
+        const statusElement = document.getElementById('status');
+        const resultContainer = document.getElementById('resultContainer');
+        const transcriptionResult = document.getElementById('transcriptionResult');
+        const detectedLanguage = document.getElementById('detectedLanguage');
 
+
+        const myvad = await vad.MicVAD.new({
+
+                onSpeechStart: () => {
+                    statusElement.textContent = 'Recording started';
+                        },
+
+
+                onSpeechEnd: (audio) => {
+                    cnt = 1;
+                    if (!instance) {
+                        instance = Module.init('whisper.bin');
+
+                        if (instance) {
+                            printTextarea("js: whisper initialized, instance: " + instance);
+                        }
+                    }
+
+                    if (!instance) {
+                        printTextarea("js: failed to initialize whisper");
+                        return;
+                    }
+                    // const wavBuffer = vad.utils.encodeWAV(arr)
+                    // const base64 = vad.utils.arrayBufferToBase64(wavBuffer)
+                    statusElement.textContent = 'Recording finished';
+                    // stopRecording();
+                    var audioAll = new Float32Array(audio0 == null ? audio.length : audio0.length + audio.length);
+                                if (audio0 != null) {
+                                    audioAll.set(audio0, 0);
+                                }
+                                audioAll.set(audio, audio0 == null ? 0 : audio0.length);
+
+                                if (instance) {
+                                    Module.set_audio(instance, audioAll);
+                                }
+                //// start recording called
+                if (!context) {
+                        context = new AudioContext({
+                            sampleRate: kSampleRate,
+                            channelCount: 1,
+                            echoCancellation: false,
+                            autoGainControl:  true,
+                            noiseSuppression: true,
+                        });
+                    }
+                                Module.set_status("");
+
+                                doRecording = true;
+                                startTime = Date.now();
+
+                                var chunks = [];
+                                var stream = null;
+
+                                // start recording ended
+                        
+                    intervalUpdate = setInterval(function() {
+                        var transcribed = Module.get_transcribed();
+
+                        if (transcribed != null && transcribed.length > 1) {
+                            transcribedAll += transcribed + '<br>';
+                            nLines++;
+
+                            // if more than 10 lines, remove the first line
+                            if (nLines > 10) {
+                                var i = transcribedAll.indexOf('<br>');
+                                if (i > 0) {
+                                    transcribedAll = transcribedAll.substring(i + 4);
+                                    nLines--;
+                                }
+                            }
+                        }
+
+                        document.getElementById('state-status').innerHTML = Module.get_status();
+                        document.getElementById('state-transcribed').innerHTML = transcribedAll;
+                    }, 100);
+                    stopRecording();         
+                    
+                    // searchString = "Hello"
+                    // if (transcribedAll.includes(searchString)) 
+                    // {
+                    //     secondary()
+                    // }
+
+                    if(cnt == 1)
+                    {   
+                        console.log(transcribedAll);
+                        main()
+                        // return ;
+                    }
+
+                    // else 
+                    // {
+                    //     console.log("The text does not contain the specified string.");
+                    // }
+
+
+                },
+                });
+
+                myvad.start();
+                // const listeningstatus = document.getElementById('listening');
+                // listeningstatus.textContent = myvad.listening();
+
+
+    }
     main();
 
 
