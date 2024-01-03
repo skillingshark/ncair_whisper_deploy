@@ -19,6 +19,19 @@ var printTextarea = (function() {
     };
 })();
 
+var printTextarea2 = (function() {
+    var element = document.getElementById('state-transcribed');
+    if (element) element.value = ''; // clear browser cache
+    return function(text) {
+        if (arguments.length > 1) text = Array.prototype.slice.call(arguments).join(' ');
+        console.log(text);
+        if (element) {
+            element.value += text + "\n";
+            element.scrollTop = element.scrollHeight; // focus on bottom
+        }
+    };
+})();
+
 async function clearCache() {
     if (confirm('Are you sure you want to clear the cache?\nAll the models will be downloaded again.')) {
         indexedDB.deleteDatabase(dbName);
