@@ -323,8 +323,8 @@
                                         stopRecording();
                                         console.log('recording stopped in main')      
                                         console.log(transcribedAll)
-                                searchString = "Hello"
-                                if (transcribedAll.toLowerCase().includes("hello"))
+                                searchString = ""
+                                if (transcribedAll.toLowerCase().includes("ok twin"))
                                 {
                                     console.log('got it ');
                                     console.log('got it ');
@@ -333,26 +333,26 @@
 
                                     // transcribedAll = '';
                                     showGreeting();
-                                    secondary()
+                                    secondary();
                                 }
-                                else if (transcribedAll.toLowerCase().includes("ok"))
+                                else if (transcribedAll.toLowerCase().includes("hello"))
                                 {
                                     console.log('got it ');
                                     console.log('got it ');
                                     console.log('got it ');
                                     console.log('got it ');
-
-                                    secondary()
+                                    showGreeting();
+                                    secondary();
                                 }
-                                else if (transcribedAll.toLowerCase().includes("google"))
-                                {
-                                    console.log('got it ');
-                                    console.log('got it ');
-                                    console.log('got it ');
-                                    console.log('got it ');
+                                // else if (transcribedAll.toLowerCase().includes("google"))
+                                // {
+                                //     console.log('got it ');
+                                //     console.log('got it ');
+                                //     console.log('got it ');
+                                //     console.log('got it ');
 
-                                    secondary()
-                                }
+                                //     secondary()
+                                // }
             },
         });
 
