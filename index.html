@@ -7,9 +7,9 @@
          integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8="
          crossorigin="anonymous"></script>
         <!--  TOKEN FOR GITHUB -->
-         <!-- <meta http-equiv="origin-trial" content="Atny3N60DQ2VmUDTOosUDLiwpTRbuSgMZGV3jOdpXNLLCfHG/RDbIvsdWeWrwWeKfI2n3AaWF6xiUHQmgMzuugYAAACBeyJvcmlnaW4iOiJodHRwczovL3NraWxsaW5nc2hhcmsuZ2l0aHViLmlvOjQ0MyIsImZlYXR1cmUiOiJVbnJlc3RyaWN0ZWRTaGFyZWRBcnJheUJ1ZmZlciIsImV4cGlyeSI6MTcwOTg1NTk5OSwiaXNTdWJkb21haW4iOnRydWV9"> -->
+         <meta http-equiv="origin-trial" content="Atny3N60DQ2VmUDTOosUDLiwpTRbuSgMZGV3jOdpXNLLCfHG/RDbIvsdWeWrwWeKfI2n3AaWF6xiUHQmgMzuugYAAACBeyJvcmlnaW4iOiJodHRwczovL3NraWxsaW5nc2hhcmsuZ2l0aHViLmlvOjQ0MyIsImZlYXR1cmUiOiJVbnJlc3RyaWN0ZWRTaGFyZWRBcnJheUJ1ZmZlciIsImV4cGlyeSI6MTcwOTg1NTk5OSwiaXNTdWJkb21haW4iOnRydWV9">
          <!-- TOKEN FOR PORT 5872 -->
-         <meta http-equiv="origin-trial" content="AtL1nQI0P4o0J+7BIUnXmUZbTKAzhbw61i7rG+bnhTOBdptUUsHShOokVnusoHtmIjX7gUXzGL8DvG4SRZz1uA8AAABgeyJvcmlnaW4iOiJodHRwOi8vMTI3LjAuMC4xOjU4NzIiLCJmZWF0dXJlIjoiVW5yZXN0cmljdGVkU2hhcmVkQXJyYXlCdWZmZXIiLCJleHBpcnkiOjE3MDk4NTU5OTl9">
+         <!-- <meta http-equiv="origin-trial" content="AtL1nQI0P4o0J+7BIUnXmUZbTKAzhbw61i7rG+bnhTOBdptUUsHShOokVnusoHtmIjX7gUXzGL8DvG4SRZz1uA8AAABgeyJvcmlnaW4iOiJodHRwOi8vMTI3LjAuMC4xOjU4NzIiLCJmZWF0dXJlIjoiVW5yZXN0cmljdGVkU2hhcmVkQXJyYXlCdWZmZXIiLCJleHBpcnkiOjE3MDk4NTU5OTl9"> -->
 
          <script src="https://cdn.jsdelivr.net/npm/onnxruntime-web/dist/ort.js"></script>
          <script src="https://cdn.jsdelivr.net/npm/@ricky0123/vad-web@0.0.7/dist/bundle.min.js"></script>
@@ -53,12 +53,6 @@
 
             <br>
 
-            <!-- <div id="input">
-                <button id="start"  onclick="onStart()" disabled>Start</button>
-                <button id="stop"   onclick="onStop()" disabled>Stop</button>
-                <button id="clear"  onclick="clearCache()">Clear Cache</button>
-            </div> -->
-
             <br> 
             <br><br><br><br><br>
 
@@ -74,66 +68,20 @@
                 <p id="greeting-text">Yes, Sir! What can I do for you?</p>
             </div>
 
-            <!-- Debug output: -->
-            <!-- <textarea id="output" rows="20"></textarea> -->
+
 
             <br>
 
-            <!-- <b>Troubleshooting</b> -->
-
             <br><br>
-
-            <!-- The page does some heavy computations, so make sure: -->
-
-            <!-- <ul>
-                <li>To use a modern web browser (e.g. Chrome, Firefox)</li>
-                <li>To use a fast desktop or laptop computer (i.e. not a mobile phone)</li>
-                <li>Your browser supports WASM <a href="https://webassembly.org/roadmap/">Fixed-width SIMD</a></li>
-            </ul> -->
-
-            <!-- <div class="cell-version">
-                <span>
-                    |
-                    Build time: <span class="nav-link">Sun Dec 10 23:17:52 2023</span> |
-                    Commit hash: <a class="nav-link" href="https://github.com/ggerganov/whisper.cpp/commit/6335933a">6335933a</a> |
-                    Commit subject: <span class="nav-link">cmake : Fix bug in httplib.h for mingw (#1615)</span> |
-                    <a class="nav-link" href="https://github.com/ggerganov/whisper.cpp/tree/master/examples/stream.wasm">Source Code</a> |
-                </span>
-            </div> -->
         </div>
 
 
         <script type="text/javascript" src="helpers.js"></script>
-        <!-- <script type="module">import { interpolateInferno } from "https://cdn.skypack.dev/d3-scale-chromatic@3" </script> -->
         <script type="text/javascript" src="https://cdn.skypack.dev/d3-scale-chromatic@3"></script>
-        <script type="module">
-            import { interpolateInferno } from 'https://cdn.skypack.dev/d3@7';
-
-            async function gradient() {
-                // Get the color scale from D3
-                const colorScale = interpolateInferno;
-
-                // Calculate the background color based on the probability value
-                const gradientValue = probs.isSpeech / 2; // Adjust as needed
-                const backgroundColor = colorScale(gradientValue);
-
-                // Apply the background color with the gradient effect
-                document.body.style.backgroundColor = backgroundColor;
-                document.body.classList.add('gradient-effect');
-
-                // ... existing code ...
-
-                // Remove gradient effect after a certain time (adjust as needed)
-                setTimeout(() => {
-                    document.body.classList.remove('gradient-effect');
-                    document.body.style.backgroundColor = ''; // Reset background color
-                }, 500);
-            }
-
-        </script>
         <script type="text/javascript">
             // <script type="module">import { interpolateInferno } from "https://cdn.skypack.dev/d3-scale-chromatic@3"
                 // const output_area = document.getElementById('state-transcribed');
+
             // web audio context
             var context = null;
 
@@ -190,11 +138,6 @@
                 printTextarea('storeFS: stored model: ' + fname + ' size: ' + buf.length);
 
                 document.getElementById('model-whisper-status').innerHTML = 'Model Loaded :  "' + model_whisper + '"';
-
-                // if (model_whisper != null) {
-                //     document.getElementById('start').disabled = false;
-                //     document.getElementById('stop' ).disabled = true;
-                // }
             }
 
             function loadWhisper(model) {
@@ -202,7 +145,7 @@
                 document.getElementById('welcome').style.display = 'none';
                 let urls = {
                     'tiny.en': './ggml-model-whisper-tiny.en.bin',
-                    'base.en': 'http://127.0.0.1:5872/03_vad_wasm/ggml-model-whisper-base.en.bin',
+                    'base.en': './ggml-model-whisper-base.en.bin',
 
                     'tiny-en-q5_1':  'https://whisper.ggerganov.com/ggml-model-whisper-tiny.en-q5_1.bin',
                     'base-en-q5_1':  'https://whisper.ggerganov.com/ggml-model-whisper-base.en-q5_1.bin',
@@ -238,13 +181,7 @@
                 };
 
                 cbCancel = function() {
-                    var el;
-                    // el = document.getElementById('fetch-whisper-tiny-en'); if (el) el.style.display = 'inline-block';
-                    // el = document.getElementById('fetch-whisper-base-en'); if (el) el.style.display = 'inline-block';
-
-                    // el = document.getElementById('fetch-whisper-tiny-en-q5_1'); if (el) el.style.display = 'inline-block';
-                    // el = document.getElementById('fetch-whisper-base-en-q5_1'); if (el) el.style.display = 'inline-block';
-
+                    var el
                     el = document.getElementById('model-whisper-status');  if (el) el.innerHTML = '';
                 };
 
@@ -307,19 +244,15 @@
 
         //////////////////////////////////////////
 
-        // let all_text = "";
-
         const myvad = await vad.MicVAD.new({
-
-            
 
             onSpeechStart: () =>{
                 statusElement.textContent = 'Recording started';
             },
+
             // onFrameProcessed: (probs) => {
             //     gradient();
             // },
-        
             
             onSpeechEnd: (audio) => {
                 if (!instance) {
@@ -347,94 +280,83 @@
                             if (instance) {
                                 Module.set_audio(instance, audioAll);
                             }
-//// start recording called
-if (!context) {
-                    context = new AudioContext({
-                        sampleRate: kSampleRate,
-                        channelCount: 1,
-                        echoCancellation: false,
-                        autoGainControl:  true,
-                        noiseSuppression: true,
-                    });
-                }
-                            Module.set_status("");
+                //// start recording called
+                if (!context) {
+                                    context = new AudioContext({
+                                        sampleRate: kSampleRate,
+                                        channelCount: 1,
+                                        echoCancellation: false,
+                                        autoGainControl:  true,
+                                        noiseSuppression: true,
+                                    });
+                                }
+                                            Module.set_status("");
 
-                            doRecording = true;
-                            startTime = Date.now();
+                                            doRecording = true;
+                                            startTime = Date.now();
 
-                            var chunks = [];
-                            var stream = null;
+                                            var chunks = [];
+                                            var stream = null;
 
-                            //// start recording ended
-                    
-                intervalUpdate = setInterval(function() {
-                    var transcribed = Module.get_transcribed();
+                                            //// start recording ended
+                                    
+                                intervalUpdate = setInterval(function() {
+                                    var transcribed = Module.get_transcribed();
 
-                    if (transcribed != null && transcribed.length > 1) {
-                        transcribedAll += transcribed + '\n';
-                        nLines++;
+                                    if (transcribed != null && transcribed.length > 1) {
+                                        transcribedAll += transcribed + '\n';
+                                        nLines++;
 
-                        // if more than 10 lines, remove the first line
-                        if (nLines > 10) {
-                            var i = transcribedAll.indexOf('\n');
-                            if (i > 0) {
-                                transcribedAll = transcribedAll.substring(i + 4);
-                                nLines--;
-                            }
-                        }
-                    }
+                                        // if more than 10 lines, remove the first line
+                                        if (nLines > 10) {
+                                            var i = transcribedAll.indexOf('\n');
+                                            if (i > 0) {
+                                                transcribedAll = transcribedAll.substring(i + 4);
+                                                nLines--;
+                                            }
+                                        }
+                                    }
 
-                    document.getElementById('state-status').innerHTML = Module.get_status();
-                    // document.getElementById('state-transcribed').innerHTML = transcribedAll;
-                }, 100);
-                        stopRecording();
-                        console.log('recording stopped in main')      
-                        console.log(transcribedAll)
-                searchString = "Hello"
-                if (transcribedAll.toLowerCase().includes("hello"))
-                {
-                    console.log('got it ');
-                    console.log('got it ');
-                    console.log('got it ');
-                    console.log('got it ');
+                                    document.getElementById('state-status').innerHTML = Module.get_status();
+                                    // document.getElementById('state-transcribed').innerHTML = transcribedAll;
+                                }, 100);
+                                        stopRecording();
+                                        console.log('recording stopped in main')      
+                                        console.log(transcribedAll)
+                                searchString = "Hello"
+                                if (transcribedAll.toLowerCase().includes("hello"))
+                                {
+                                    console.log('got it ');
+                                    console.log('got it ');
+                                    console.log('got it ');
+                                    console.log('got it ');
 
-                    // transcribedAll = '';
-                    showGreeting();
-                    secondary()
-                }
-                else if (transcribedAll.toLowerCase().includes("ok"))
-                {
-                    console.log('got it ');
-                    console.log('got it ');
-                    console.log('got it ');
-                    console.log('got it ');
+                                    // transcribedAll = '';
+                                    showGreeting();
+                                    secondary()
+                                }
+                                else if (transcribedAll.toLowerCase().includes("ok"))
+                                {
+                                    console.log('got it ');
+                                    console.log('got it ');
+                                    console.log('got it ');
+                                    console.log('got it ');
 
-                    secondary()
-                }
-                else if (transcribedAll.toLowerCase().includes("google"))
-                {
-                    console.log('got it ');
-                    console.log('got it ');
-                    console.log('got it ');
-                    console.log('got it ');
+                                    secondary()
+                                }
+                                else if (transcribedAll.toLowerCase().includes("google"))
+                                {
+                                    console.log('got it ');
+                                    console.log('got it ');
+                                    console.log('got it ');
+                                    console.log('got it ');
 
-                    secondary()
-                }
-                
-                // searchString= "Okay"
-                // stopRecording();
-                // else 
-                // {
-                //     console.log("The text does not contain the specified string.");
-                // }
-
-
+                                    secondary()
+                                }
             },
         });
 
         myvad.start();
-        // const listeningstatus = document.getElementById('listening');
-        // listeningstatus.textContent = myvad.listening();
 
     }
         
@@ -528,27 +450,12 @@ if (!context) {
                         document.getElementById('state-transcribed').textContent = transcribedAll;
                     }, 100);
                     stopRecording();         
-                    
-                    // searchString = "Hello"
-                    // if (transcribedAll.includes(searchString)) 
-                    // {
-                    //     secondary()
-                    // }
-
-                   
-
-                    // else 
-                    // {
-                    //     console.log("The text does not contain the specified string.");
-                    // }
 
 
                 },
                 });
 
                 myvad.start();
-                // const listeningstatus = document.getElementById('listening');
-                // listeningstatus.textContent = myvad.listening();
                 if(cnt == 1)
                     {   
                         console.log('printing from secondary')
